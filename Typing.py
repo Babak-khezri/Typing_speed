@@ -19,18 +19,29 @@ def delete(word):
         word += i
     return word
 # get acces to start program and start timer
-print("Press Enter to start : ")
-while True:
-    starter = getchar()
-    if ord(starter) == 13:
-        system('clear')
-        break
-    else:
-        # just some thing for beauty
-        for i in range(20):
+def result(count,ture_ans):
+    print("your speed type is : ",format(count - 1)," word in minute and your accuracy : %",end=format(int(ture_ans)))
+    #print(ture_ans)
+    if count <= 15 :
+        print("\nyou are slow need practice")
+    if count > 15 and count <= 35:
+        print("\nnormal typing can be better")
+    if count > 35:
+        print("\nwell done you are perfect") 
+def starter():
+    print("Press Enter to start : ")
+    while True:
+        starter = getchar()
+        if ord(starter) == 13:
             system('clear')
-            sleep(0.001)
-            print("Press Enter to start : ")
+            break
+        else:
+            # just some thing for beauty
+            for i in range(20):
+                system('clear')
+                sleep(0.001)
+                print("Press Enter to start : ")
+starter()
 time_1 = time()
 time_2 = time()
 count = 0
@@ -80,11 +91,4 @@ while (time_2 - time_1) < 60:
             fail += 1
     time_2 = time()
 ture_ans = 100 - ((100 * fail) / all_w)
-print("your speed type is : ",format(count)," word in minute and your accuracy : %",end=format(int(ture_ans)))
-#print(ture_ans)
-if count <= 15 :
-    print("\nyou are slow need practice")
-if count > 15 and count <= 35:
-    print("\nnormal typing can be better")
-if count > 35:
-    print("\nwell done you are perfect") 
+result(count,ture_ans)
