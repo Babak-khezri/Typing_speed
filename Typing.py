@@ -46,8 +46,9 @@ while (time_2 - time_1) < 60:
     # dont let come repetitious words
     if n not in numb:
         numb.append(n)
-        print(lst[n],  "   |   your left time is : ",end="")
-        print(int(60 -(time_2 - time_1)), "        your true answers : {}".format(count))
+        print(lst[n],  "\t|\tyour left time is : ",end="")
+        time_2 = time()
+        print(int(60 -(time_2 - time_1)), "\t\tyour true answers : {}".format(count))
         word = ""
         ch = ''
         while True:
@@ -58,14 +59,16 @@ while (time_2 - time_1) < 60:
             if ord(ch) == 127: # 127 is codeaski of space
                 word = delete(word)
                 system('clear')
-                print(lst[n],end = "    |   your left time is : ")
-                print(int(60 -(time_2 - time_1)),end = "         your true answers : {}\n".format(count))
+                print(lst[n],end = "\t|\tyour left time is : ")
+                time_2 = time()
+                print(int(60 -(time_2 - time_1)),end = "\t\tyour true answers : {}\n".format(count))
                 print(word)
             else:
                 system('clear')
                 word += ch
-                print(lst[n],end = "    |   your left time is : ")
-                print(int(60 -(time_2 - time_1)),end = "         your true answers : {}\n".format(count))
+                print(lst[n],end = "\t|\tyour left time is : ")
+                time_2 = time()
+                print(int(60 -(time_2 - time_1)),end = "\t\tyour true answers : {}\n".format(count))
                 print(word)
         #count all words that come
         all_w += 1
