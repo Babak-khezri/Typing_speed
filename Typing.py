@@ -12,7 +12,7 @@ def delete(word):
     for i in range(x):
         lst.append(word[i])
     #delete the last letter
-    lst[x-1] = ""
+    lst.pop(x-1)
     word = ""
     # remake the word
     for i in lst:
@@ -33,20 +33,17 @@ def starter():
     while True:
         starter = getchar()
         if ord(starter) == 13:
-            system('clear')
+            system('cls')
             break
         else:
             # just some thing for beauty
             for i in range(20):
-                system('clear')
+                system('cls')
                 sleep(0.001)
                 print("Press Enter to start : ")
 starter()
-time_1 = time()
-time_2 = time()
-count = 0
-fail = 0
-all_w = 0
+time_1 = time_2 = time()
+count = fail = all_w = 0
 lst = ["smoke","struct","coding","windows","forward","smoke","silver","soldier","stump","google","linux","pattern","special","mother","language","terminal","sandwich","though","enough","might","printer","problem","computer","speak","perhaps","home","book","door","think","monster","hello","good","self","night","sun","car","at","drive","phone","cost","allow","start","type","gold","green","sky","home","country","water","what","sleep","cake","freind","programing","level","today","search","queen","player","game","six","seven","movie","music","map","while","sound","order","number"]
 numb = []
 #get the number of words
@@ -65,17 +62,17 @@ while (time_2 - time_1) < 60:
         while True:
             ch = getchar()
             if ch == " ":
-                system('clear')
+                system('cls')
                 break
-            if ord(ch) == 127: # 127 is codeaski of space
+            if ord(ch) == 8: # 8 is codeaski of space in windows
                 word = delete(word)
-                system('clear')
+                system('cls')
                 print(lst[n],end = "\t|\tyour left time is : ")
                 time_2 = time()
                 print(int(60 -(time_2 - time_1)),end = "\t\tyour true answers : {}\n".format(count))
                 print(word)
             else:
-                system('clear')
+                system('cls')
                 word += ch
                 print(lst[n],end = "\t|\tyour left time is : ")
                 time_2 = time()
