@@ -2,6 +2,7 @@ from time import *
 from click import *
 from random import *
 from os import *
+import colorama as col
 # to use back space
 def delete(word):
     x = (len(word))
@@ -20,7 +21,7 @@ def delete(word):
     return word
 # get acces to start program and start timer
 def result(count,ture_ans):
-    print("your speed type is : ",format(count - 1)," word in minute and your accuracy : %",end=format(int(ture_ans)))
+    print( col.Fore.BLUE + col.Style.BRIGHT + "your speed type is : ",format(count - 1)," word in minute and your accuracy : %",end=format(int(ture_ans)))
     #print(ture_ans)
     if count <= 15 :
         print("\nyou are slow need practice")
@@ -29,7 +30,7 @@ def result(count,ture_ans):
     if count > 35:
         print("\nwell done you are perfect") 
 def starter():
-    print("Press Enter to start : ")
+    print(col.Style.BRIGHT + col.Fore.BLUE + "Press Enter to start : ")
     while True:
         starter = getchar()
         if ord(starter) == 13:
@@ -40,7 +41,7 @@ def starter():
             for i in range(20):
                 system('cls')
                 sleep(0.001)
-                print("Press Enter to start : ")
+                print(col.Style.BRIGHT + col.Fore.BLUE + "Press Enter to start : ")
 starter()
 time_1 = time_2 = time()
 count = fail = all_w = 0
@@ -54,9 +55,9 @@ while (time_2 - time_1) < 60:
     # dont let come repetitious words
     if n not in numb:
         numb.append(n)
-        print(lst[n],  "\t|\tyour left time is : ",end="")
+        print(col.Fore.GREEN + col.Style.BRIGHT + lst[n], col.Fore.YELLOW + col.Style.BRIGHT +  "\t|\tyour left time is : ",end="")
         time_2 = time()
-        print(int(60 -(time_2 - time_1)), "\t\tyour true answers : {}".format(count))
+        print(int(60 -(time_2 - time_1)), col.Fore.RED + col.Style.BRIGHT + "\t\tyour true answers : {}".format(count))
         word = ""
         ch = ''
         while True:
@@ -67,17 +68,17 @@ while (time_2 - time_1) < 60:
             if ord(ch) == 8: # 8 is codeaski of space in windows
                 word = delete(word)
                 system('cls')
-                print(lst[n],end = "\t|\tyour left time is : ")
+                print(col.Fore.GREEN + col.Style.BRIGHT + lst[n],end = col.Fore.YELLOW + col.Style.BRIGHT +  "\t|\tyour left time is : ")
                 time_2 = time()
-                print(int(60 -(time_2 - time_1)),end = "\t\tyour true answers : {}\n".format(count))
-                print(word)
+                print(int(60 -(time_2 - time_1)),end = col.Fore.RED + col.Style.BRIGHT + "\t\tyour true answers : {}\n".format(count))
+                print(col.Fore.GREEN + col.Style.BRIGHT +  word)
             else:
                 system('cls')
                 word += ch
-                print(lst[n],end = "\t|\tyour left time is : ")
+                print(col.Fore.GREEN + col.Style.BRIGHT + lst[n],end = col.Fore.YELLOW + col.Style.BRIGHT + "\t|\tyour left time is : ")
                 time_2 = time()
-                print(int(60 -(time_2 - time_1)),end = "\t\tyour true answers : {}\n".format(count))
-                print(word)
+                print(int(60 -(time_2 - time_1)),end = col.Fore.RED + col.Style.BRIGHT + "\t\tyour true answers : {}\n".format(count))
+                print(col.Fore.GREEN + col.Style.BRIGHT +  word)
         #count all words that come
         all_w += 1
         #final check
