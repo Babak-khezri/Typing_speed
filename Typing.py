@@ -6,23 +6,18 @@ from tqdm import tqdm
 import colorama as co
 # to use back space
 def delete(word):
-    x = (len(word))
-    if x == 0:
+    if len(word) == 0:
         return ""
-    lst = []
-    # put the letters of a word in list
-    for i in range(x):
-        lst.append(word[i])
+    #take apart the word
+    lst = list(word)
     #delete the last letter
-    lst.pop(x-1)
-    word = ""
+    lst.remove(lst[-1])
     # remake the word
-    for i in lst:
-        word += i
+    word = "".join(lst)
     return word
 #show the result of them game
 def result(trueAnswer,ture_ans):
-    print( co.Fore.BLUE + co.Style.BRIGHT + "your speed type is : ",format(trueAnswer - 1)," word in minute and your accuracy : %",end=format(int(ture_ans)))
+    print( co.Fore.BLUE + "your speed type is : ",format(trueAnswer - 1)," word in minute and your accuracy : %",end=format(int(ture_ans)))
     #print(ture_ans)
     if trueAnswer <= 15 :
         print("\nyou are slow need practice")
@@ -32,12 +27,15 @@ def result(trueAnswer,ture_ans):
         print("\nwell done you are perfect") 
 # get acces to start program and start timer
 def starter():
-    print(co.Style.BRIGHT + co.Fore.BLUE + "Press Enter to start : " + co.Style.BRIGHT + co.Fore.LIGHTGREEN_EX +  " ")
+    print(co.Style.BRIGHT + co.Fore.LIGHTGREEN_EX +  " ")
+    co.Fore.LIGHTGREEN_EX
+    for i in tqdm(range(15),ncols=70):
+        sleep(0.1)
+    system("cls")
+    print(co.Fore.BLUE + "Press Enter to start : ")
     while True:
         starter = getchar()
         if ord(starter) == 13:
-            for i in tqdm(range(10),ncols=70):
-                sleep(0.1)
             system('cls')
             game()
         else:
@@ -45,7 +43,7 @@ def starter():
             for i in range(20):
                 system('cls')
                 sleep(0.001)
-                print(co.Style.BRIGHT + co.Fore.BLUE + "Press Enter to start : ")
+                print(co.Fore.BLUE + "Press Enter to start : ")
 #main structer of game
 def game():
     time_1 = time_2 = time()
@@ -60,9 +58,9 @@ def game():
         # dont let come repetitious words
         if n not in numb:
             numb.append(n)
-            print(co.Fore.GREEN + co.Style.BRIGHT + lst[n].ljust(10),end = co.Fore.YELLOW + co.Style.BRIGHT +  "|\tyour left time is : ")
+            print(co.Fore.GREEN + lst[n].ljust(10),end = co.Fore.YELLOW + "|\tyour left time is : ")
             time_2 = time()
-            print(int(60 -(time_2 - time_1)), co.Fore.RED + co.Style.BRIGHT + "\t\tyour true answers : {}".format(trueAnswer))
+            print(int(60 -(time_2 - time_1)), co.Fore.RED + "\t\tyour true answers : {}".format(trueAnswer))
             word = ""
             ch = ''
             while True:
@@ -72,20 +70,20 @@ def game():
                     system('cls')
                     break
                 # 8 is codeaski of space in windows
-                if ord(ch) == 8:
+                if ord(ch) == ord("\b"):
                     word = delete(word)
                     system('cls')
-                    print(co.Fore.GREEN + co.Style.BRIGHT + lst[n].ljust(10),end = co.Fore.YELLOW + co.Style.BRIGHT +  "|\tyour left time is : ")
+                    print(co.Fore.GREEN + lst[n].ljust(10),end = co.Fore.YELLOW + "|\tyour left time is : ")
                     time_2 = time()
-                    print(int(60 -(time_2 - time_1)),end = co.Fore.RED + co.Style.BRIGHT + "\t\tyour true answers : {}\n".format(trueAnswer))
-                    print(co.Fore.GREEN + co.Style.BRIGHT +  word)
+                    print(int(60 -(time_2 - time_1)),end = co.Fore.RED + "\t\tyour true answers : {}\n".format(trueAnswer))
+                    print(co.Fore.GREEN +  word)
                 else:
                     system('cls')
                     word += ch
-                    print(co.Fore.GREEN + co.Style.BRIGHT + lst[n].ljust(10),end = co.Fore.YELLOW + co.Style.BRIGHT + "|\tyour left time is : ")
+                    print(co.Fore.GREEN + lst[n].ljust(10),end = co.Fore.YELLOW + "|\tyour left time is : ")
                     time_2 = time()
-                    print(int(60 -(time_2 - time_1)),end = co.Fore.RED + co.Style.BRIGHT + "\t\tyour true answers : {}\n".format(trueAnswer))
-                    print(co.Fore.GREEN + co.Style.BRIGHT +  word)
+                    print(int(60 -(time_2 - time_1)),end = co.Fore.RED + "\t\tyour true answers : {}\n".format(trueAnswer))
+                    print(co.Fore.GREEN +  word)
             #trueAnswer all words that come
             all_w += 1
             #final check
@@ -95,6 +93,7 @@ def game():
                 #count all wrong words
                 fail += 1
         time_2 = time()
+    #find the porsant of true typing
     ture_ans = 100 - ((100 * fail) / all_w)
     result(trueAnswer,ture_ans)
 starter()
