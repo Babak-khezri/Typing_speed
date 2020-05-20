@@ -17,30 +17,23 @@ shuffle(lst)  # Get random sorted list
 win = Tk()
 win.resizable(False, False)  # Lock change size
 win.title('Typing speed')
-app_icon = PhotoImage(
-    file='C:\\Users\\Babak\\Desktop\\python\\EXTRA_FILES\\ico.png')
-win.iconphoto(False, app_icon)  # Change icon
 win['background'] = '#330066'  # Change main background
 win.geometry('484x220')
 show_word = Label(win)
 next_word = Label(win)
 show_true = Label(win)
 enter = Entry(win)
-enter.config(font=("Aryal", 32, 'bold'), bg="pink")
+enter.config(font=("Times", 35, 'bold'), bg="pink",justify='center')
 enter.grid(row=3, column=0, columnspan=5)
-show_time = Label(win)
-
-
+show_time = Label(win,text='time = 60',font=(("Times", 20, 'bold')), bg='#330066', fg='red')
+show_time.grid(row=0, column=0)
 def New_word():
     global true_answers, number
-    show_word.config(text=lst[number], fg='#00e600',
-                     font=(("Times", 32, 'bold')), bg='#330066')
+    show_word.config(text=lst[number], fg='#00e600', font=(("Times", 32, 'bold')), bg='#330066')
     show_word.grid(row=1, column=1)
-    show_true.config(text=true_answers, fg='red', font=(
-        ("Times", 20, 'bold')), bg='#330066')
+    show_true.config(text=true_answers, fg='red', font=(("Times", 20, 'bold')), bg='#330066')
     show_true.grid(row=0, column=3)
-    next_word.config(
-        text="next = " + lst[number+1], fg='#ffff80', font=(("Times", 22, 'bold')), bg='#330066')
+    next_word.config(text="next = " + lst[number+1], fg='#ffff80', font=(("Times", 22, 'bold')), bg='#330066')
     next_word.grid(row=4, column=1)
     enter.delete(0, END)
 
@@ -50,6 +43,13 @@ def Get_word():
     trueAnswer = 0
     while True:
         word_list = list(enter.get())
+        if len(word_list) != 0:
+            if enter.get() not in lst[number] and word_list[-1] != ' ' or word_list[0] != lst[number][0]:
+                enter.config(fg='red')
+                enter.grid(row=3, column=0, columnspan=5)
+            else:
+                enter.config(fg='green')
+                enter.grid(row=3, column=0, columnspan=5)
         sleep(0.01)  # Avoid from crush
         if len(word_list) != 0:
             if word_list[-1] == ' ':
@@ -62,13 +62,15 @@ def Get_word():
 
 
 def Timer():
-    for time in range(60, -1, -1):
-        show_time.config(text="time = " + str(time),
-                         font=(("Times", 20, 'bold')), bg='#330066', fg='red')
-        show_time.grid(row=0, column=0)
-        sleep(1)
-    win.withdraw()
-    end()
+    while True:
+        if enter.get() != "":
+            for time in range(60, -1, -1):
+                show_time.config(text="time = " + str(time),font=(("Times", 20, 'bold')), bg='#330066', fg='red')
+                show_time.grid(row=0, column=0)
+                sleep(1)
+            win.withdraw()
+            end()
+            break
 
 
 def end():
